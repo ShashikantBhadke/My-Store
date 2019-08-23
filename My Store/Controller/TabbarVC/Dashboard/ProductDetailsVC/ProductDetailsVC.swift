@@ -9,22 +9,25 @@
 import UIKit
 
 class ProductDetailsVC: UIViewController {
-
+    // MARK:- Outlets
+    // MARK:- Variables
+    // MARK:- ViewLifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    }
+    // MARK:- SetUpView
+    private func setUpView() {
+    }
+    // MARK:- Button Actions
+    // MARK:- API Calls
+    // MARK:- Receive Memory Warning
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        debugPrint("Receive Memory Warning in \(String(describing: self))")
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK:- Deinit
+    deinit {
+        debugPrint("\(String(describing: self)) controller removed...")
     }
-    */
-
-}
+} //class

@@ -1,10 +1,13 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
-
 target 'My Store' do
-  # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for My Store
-
+  # 1. Firebase
+  pod 'Firebase'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
+  
+  # 2. Google SignIN
+  pod 'GoogleSignIn'
+  
+  
 end

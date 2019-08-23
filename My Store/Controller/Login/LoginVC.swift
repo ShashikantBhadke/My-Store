@@ -7,34 +7,46 @@
 //
 
 import UIKit
+import FirebaseAuth
+import GoogleSignIn
 
 class LoginVC: UIViewController {
+    
     // MARK:- Outlets
+    @IBOutlet private weak var btnGoogle: UIButton!
+    
     // MARK:- Variables
+    var isSignInSuccess: Bool?
+    
     // MARK:- ViewLifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpView()
     }
-    // MARK:- SetUpView
-    private func setUpView() {
-    }
-    // MARK:- Button Actions
-    @IBAction private func btnLoginPressed(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.5, animations: {
-            sender.transform = CGAffineTransform.init(scaleX: 1.2, y: 1.2)
-        }) { (bool) in
-            if bool {
-                sender.transform = .identity
-                self.pushTabbarVC()
-            }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if Auth.auth().currentUser != nil {
+            self.pushTabBarController()
         }
     }
-    // MARK:- API Calls
-    // MARK:- Custom Methods
-    private func pushTabbarVC() {
-        guard let tabbarVC = self.storyboard?.instantiateViewController(withIdentifier: String(describing: TabbarVC.self)) as? TabbarVC, let keyWindow = UIApplication.shared.keyWindow else { return }
-        keyWindow.rootViewController = tabbarVC
+    
+    // MARK:- SetUpView
+    private func setUpView() {
+        self.title = "Google SignIn..."
+        btnGoogle.setCorner(5.0)
+        btnGoogle.backgroundColor = UIColor.white
+        GIDSignIn.sharedInstance().delegate = self
     }
+    
+    // MARK:- Button Actions
+    @IBAction private func btnLoginPressed(_ sender: UIButton) {
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance()?.signIn()
+    }
+    
+    // MARK:- Custom Methods
+    
     // MARK:- Receive Memory Warning
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

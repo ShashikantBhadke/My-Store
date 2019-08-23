@@ -7,19 +7,41 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ProfileVC: UIViewController {
+    
     // MARK:- Outlets
+    @IBOutlet private weak var btnLogout: UIButton!
+    
     // MARK:- Variables
+    
     // MARK:- ViewLifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpView()
     }
     // MARK:- SetUpView
     private func setUpView() {
+        btnLogout.setCornerAndBoreder(5.0, btnLogout.titleLabel?.textColor ?? UIColor.blue)
     }
+    
     // MARK:- Button Actions
-    // MARK:- API Calls
+     @IBAction private func btnLogoutPressed(_ sender: UIButton) {
+        logOut()
+    }
+    
+    // MARK:- Custom Methods
+    func logOut() {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        pushLoginController()
+    }
+    
     // MARK:- Receive Memory Warning
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

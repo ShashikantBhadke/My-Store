@@ -6,28 +6,66 @@
 //  Copyright © 2019 Shashikant Bhadke. All rights reserved.
 //
 
+
+import Firebase
 import Foundation
+import FirebaseAuth
+import FirebaseDatabase
 
 enum Result<T> {
     case success(T)
     case error(String)
 }//enum
 
-struct ProductModel {
-    var intId: Int?
-    var strName: String?
-    var dobPrice: Double?
-    var dobOldPrice: Double?
-    var strImageName: String?
-    
-    static func getSampleData(_ complection: @escaping(Result<[ProductModel]?>)->()) {
-        let obj1 = ProductModel(intId: 0, strName: "AIR MAX 91", dobPrice: 149, dobOldPrice: 200, strImageName: "sample1")
-        let obj2 = ProductModel(intId: 1, strName: "AIR MAX 92", dobPrice: 129, dobOldPrice: nil, strImageName: "sample2")
-        let obj3 = ProductModel(intId: 2, strName: "AIR MAX 93", dobPrice: 143, dobOldPrice: 200, strImageName: "sample3")
-        let obj4 = ProductModel(intId: 3, strName: "AIR MAX 94", dobPrice: 110, dobOldPrice: 309, strImageName: "sample2")
-        let obj5 = ProductModel(intId: 4, strName: "AIR MAX 95", dobPrice: 209, dobOldPrice: nil, strImageName: "sample1")
-        let obj6 = ProductModel(intId: 5, strName: "AIR MAX 96", dobPrice: 250, dobOldPrice: 340, strImageName: "sample3")
-        
-        complection(.success([obj1, obj2, obj3, obj4, obj5, obj6,]))
-    }
+struct ProductModel: Codable {
+    var desc: String?
+    var name: String?
+    var price: Int?
+    var oldPrice: Int?
+    var file: String?
 } //struct
+
+
+class ProductDataBase {
+    /// Initialize  FIrebase referance
+    private init () { }
+    private static var ref: DatabaseReference!
+    
+    class func getProductLists(_ complection: @escaping(Result<[ProductModel]>)->()) {
+        if ref == nil {
+            ref = Database.database().reference()
+        }
+        ref.child("ProductTable").observeSingleEvent(of: .value, with: { (snapshot) in
+            guard var myObj = snapshot.value as? [Any] else {
+                complection(.error(AlertMessage.parseError.rawValue))
+                return
+            }
+            for i in 0..<myObj.count - 1 {
+                if myObj[i] is NSNull {
+                    myObj.remove(at: i)
+                }
+            }
+            guard let _data = myObj.jsonData else {
+                complection(.error(AlertMessage.parseError.rawValue))
+                return
+            }
+            
+            do {
+                let mydata =  try JSONDecoder().decode([ProductModel].self, from: _data)
+                complection(.success(mydata))
+            } catch let decodeError {
+                complection(.error(decodeError.localizedDescription))
+            }
+        }) { (err) in
+            var strError = AlertMessage.somethingWrong.rawValue
+            strError = err.localizedDescription
+            complection(.error(strError))
+        }
+    }
+} // class
+
+extension Collection {
+    var jsonData: Data? {
+        return try? JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
+    }
+}

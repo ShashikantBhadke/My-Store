@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol ProductCellProtocol: class {
     func btnLikePressed(intIndex: Int)
@@ -43,20 +44,23 @@ class ProductCell: UICollectionViewCell {
         resetData()
         
         guard let obj = product else { return }
-        lblTitle.text = obj.strName ?? ""
-        lblPrice.text = "$ " + String(format: "%.01f", obj.dobPrice ?? 0.00)
-        if let dobOldPrice = obj.dobOldPrice {
-            lblOldPrice.text = "$ " + String(format: "%.01f", dobOldPrice)
+        lblTitle.text = obj.name ?? ""
+        lblPrice.text = "₹ " + "\(obj.price ?? 0)"
+        if let intOldPrice = obj.oldPrice {
+            let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ " + "\(intOldPrice)")
+            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+            lblOldPrice.attributedText = attributeString
         }
-        if let strImgName = obj.strImageName, !strImgName.isEmpty {
-            imgvProduct.image = UIImage.init(named: strImgName)
-        }        
+        if let strImgName = obj.file, !strImgName.isEmpty, let url = URL(string: strImgName) {
+            let resize = ResizingImageProcessor(referenceSize: imgvProduct.frame.size)
+            imgvProduct.kf.setImage(with: url, placeholder: nil, options: [.processor(resize)], progressBlock: nil)
+        }
     }
     
     private func resetData() {
         imgvProduct.image   = nil
         lblTitle.text       = ""
-        lblOldPrice.text    = ""
+        lblOldPrice.attributedText = nil
         lblPrice.text       = ""
     }
     

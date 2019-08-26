@@ -21,4 +21,16 @@ extension UIViewController {
         keyWindow.rootViewController = loginVC
     }
     
+    func showAlert(strTitle: AlertTitle, strMessage: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: strTitle.rawValue, message: strMessage, preferredStyle: .alert)
+            let okButton = UIAlertAction(title: AlertBtn.Ok.rawValue, style: .cancel) { (_ ) in
+                alert.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(okButton)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    
 } //extension

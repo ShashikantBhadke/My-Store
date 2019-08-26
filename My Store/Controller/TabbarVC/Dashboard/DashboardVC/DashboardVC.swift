@@ -12,6 +12,7 @@ class DashboardVC: UIViewController {
     
     // MARK:- Outlets
     @IBOutlet private weak var collectionView       : UICollectionView!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK:- Variables
     var arrProduct = [ProductModel]()
@@ -30,6 +31,7 @@ class DashboardVC: UIViewController {
     
     // MARK:- SetUpView
     private func setUpView() {
+        collectionView.isHidden = true
         collectionDataSource = DashboardCollectionView()
         collectionView.delegate = collectionDataSource
         collectionView.dataSource = collectionDataSource
@@ -38,14 +40,17 @@ class DashboardVC: UIViewController {
     // MARK:- Button Actions
     // MARK:- API Calls
     private func callWebService() {
-        ProductModel.getSampleData { (res) in
+        activityIndicator.startAnimating()
+        ProductDataBase.getProductLists { (res) in
             switch res {
-            case .success( let data):
-                self.arrProduct = data ?? []
+            case .success( let obj):
+                self.collectionView.isHidden = false
+                self.activityIndicator.stopAnimating()
+                self.arrProduct = obj
                 self.collectionDataSource?.arrObject = self.arrProduct
                 self.collectionView.reloadData()
-            case .error(let strError):
-                debugPrint(strError)
+            case.error(let strError):
+                self.showAlert(strTitle: .Error, strMessage: strError)
             }
         }
     }

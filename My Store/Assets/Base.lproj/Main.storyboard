@@ -110,10 +110,10 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3AI-FS-1cg">
-                                                                    <rect key="frame" x="20" y="37.5" width="35" height="35"/>
+                                                                    <rect key="frame" x="20" y="37.5" width="28" height="28"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="35" id="Ipo-X6-9Am"/>
-                                                                        <constraint firstAttribute="height" constant="35" id="bwq-cp-lJK"/>
+                                                                        <constraint firstAttribute="width" constant="28" id="Ipo-X6-9Am"/>
+                                                                        <constraint firstAttribute="height" constant="28" id="bwq-cp-lJK"/>
                                                                     </constraints>
                                                                     <state key="normal" image="icon_Heart"/>
                                                                     <connections>
@@ -121,10 +121,10 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qiu-Os-7PO">
-                                                                    <rect key="frame" x="295" y="42.5" width="35" height="35"/>
+                                                                    <rect key="frame" x="302" y="42.5" width="28" height="28"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="35" id="TZg-Jm-92H"/>
-                                                                        <constraint firstAttribute="width" constant="35" id="oWW-eA-5O9"/>
+                                                                        <constraint firstAttribute="height" constant="28" id="TZg-Jm-92H"/>
+                                                                        <constraint firstAttribute="width" constant="28" id="oWW-eA-5O9"/>
                                                                     </constraints>
                                                                     <state key="normal" image="icon_Cart"/>
                                                                     <connections>
@@ -193,18 +193,25 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Zbc-i5-M7F">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="tUe-gr-8lf" firstAttribute="trailing" secondItem="hgI-hM-VxA" secondAttribute="trailing" id="Izr-DG-3dt"/>
                             <constraint firstItem="tUe-gr-8lf" firstAttribute="bottom" secondItem="hgI-hM-VxA" secondAttribute="bottom" id="Jp8-JX-yrl"/>
+                            <constraint firstItem="Zbc-i5-M7F" firstAttribute="centerX" secondItem="PUo-uO-3Sa" secondAttribute="centerX" id="atU-hh-Nnl"/>
                             <constraint firstItem="hgI-hM-VxA" firstAttribute="top" secondItem="tUe-gr-8lf" secondAttribute="top" id="gAQ-6v-iet"/>
+                            <constraint firstItem="Zbc-i5-M7F" firstAttribute="centerY" secondItem="PUo-uO-3Sa" secondAttribute="centerY" id="gzN-fW-Ifi"/>
                             <constraint firstItem="hgI-hM-VxA" firstAttribute="leading" secondItem="tUe-gr-8lf" secondAttribute="leading" id="tbN-89-slR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tUe-gr-8lf"/>
                     </view>
                     <navigationItem key="navigationItem" title="All Products" id="hMl-B6-Y6H"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="Zbc-i5-M7F" id="Hah-LG-qWa"/>
                         <outlet property="collectionView" destination="hgI-hM-VxA" id="6O0-98-3B5"/>
                     </connections>
                 </viewController>

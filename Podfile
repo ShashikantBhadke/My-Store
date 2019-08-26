@@ -9,5 +9,7 @@ target 'My Store' do
   # 2. Google SignIN
   pod 'GoogleSignIn'
   
-  
+  # 3. Image Downloader
+  pod 'Kingfisher'
+
 end

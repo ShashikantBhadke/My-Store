@@ -9,8 +9,10 @@
 import Foundation
 
 enum AlertTitle: String {
-    case Error = "Error!"
-    case Warning = "Warning!"
+    case Error      = "Error!"
+    case Warning    = "Warning!"
+    case Bonzi      = "Bonzi..😀!"
+    case Success    = "Success..!"
 }
 
 enum AlertBtn: String {
@@ -19,6 +21,7 @@ enum AlertBtn: String {
 }
 
 enum AlertMessage: String {
-    case parseError = "Unable to parse data"
+    case parseError     = "Unable to parse data"
     case somethingWrong = "Oops something went wrong..!"
+    case productUpdate  = "Product update successfuly."
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DashboardCollectionViewProtocol: class {
+protocol protocolDashboardCollectionView: class {
     func didSelectItem(intIndex: Int, obj: ProductModel)
 }
 
@@ -18,8 +18,8 @@ class DashboardCollectionView: NSObject {
     var arrObject = [ProductModel]()
     weak var delegate: UIViewController? {
         didSet {
-            _delegate = delegate as? DashboardCollectionViewProtocol
+            _delegate = delegate as? protocolDashboardCollectionView
         }
     }
-    internal weak var _delegate: DashboardCollectionViewProtocol?
+    internal weak var _delegate: protocolDashboardCollectionView?
 } //class

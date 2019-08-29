@@ -18,6 +18,7 @@ enum Result<T> {
 }//enum
 
 struct ProductModel: Codable {
+    var id: Int?
     var desc: String?
     var name: String?
     var price: Int?
@@ -60,6 +61,30 @@ class ProductDataBase {
             var strError = AlertMessage.somethingWrong.rawValue
             strError = err.localizedDescription
             complection(.error(strError))
+        }
+    }
+    
+    class func updateProduct(_ intID: Int, _ product: ProductModel, _ complection: @escaping(Result<Bool>)->()) {
+        if ref == nil {
+            ref = Database.database().reference()
+        }
+        
+        var parameters = [String: Any]()
+        
+        parameters["desc"] = "We can change data from ios device...😅"
+        parameters["file"] = product.file ?? ""
+        parameters["id"] = product.id ?? 1000
+        parameters["name"] = product.name ?? ""
+        parameters["price"] = product.price ?? 10109
+        
+        ref.child("ProductTable").child("\(intID)").setValue(parameters) { (err, _ref) in
+            if let _err = err {
+                var strError = AlertMessage.somethingWrong.rawValue
+                strError = _err.localizedDescription
+                complection(.error(strError))
+            } else {
+                complection(.success(true))
+            }
         }
     }
 } // class

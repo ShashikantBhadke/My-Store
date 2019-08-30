@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-protocol ProductCellProtocol: class {
+protocol protocolProductCell: class {
     func btnLikePressed(intIndex: Int)
     func btnCartPressed(intIndex: Int)
 }
@@ -32,7 +32,7 @@ class ProductCell: UICollectionViewCell {
             setUpData()
         }
     }
-    weak var delegate   : ProductCellProtocol?
+    weak var delegate   : protocolProductCell?
     
     // MARK:- Default Methods
     override func awakeFromNib() {

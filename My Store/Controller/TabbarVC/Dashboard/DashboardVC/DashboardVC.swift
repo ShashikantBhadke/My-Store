@@ -35,6 +35,7 @@ class DashboardVC: UIViewController {
         collectionDataSource = DashboardCollectionView()
         collectionView.delegate = collectionDataSource
         collectionView.dataSource = collectionDataSource
+        collectionDataSource?.delegate = self
     }
     
     // MARK:- Button Actions

@@ -21,7 +21,8 @@ enum AlertBtn: String {
 }
 
 enum AlertMessage: String {
-    case parseError     = "Unable to parse data"
-    case somethingWrong = "Oops something went wrong..!"
-    case productUpdate  = "Product update successfuly."
+    case userSessionFail    = "Users session expire...!"
+    case parseError         = "Unable to parse data"
+    case somethingWrong     = "Oops something went wrong..!"
+    case productUpdate      = "Product update successfuly."
 }

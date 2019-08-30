@@ -18,7 +18,7 @@ extension DashboardCollectionView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProductCell.self), for: indexPath) as? ProductCell else { return UICollectionViewCell() }
         if arrObject.count > indexPath.item {
             cell.intIndex = indexPath.item
-            cell.delegate = delegate as? ProductCellProtocol
+            cell.delegate = delegate as? protocolProductCell
             cell.product = arrObject[indexPath.item]
         }
         return cell

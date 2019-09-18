@@ -5,3 +5,4 @@ E-commerace demo app ...
 
 
 ![Sample](https://raw.githubusercontent.com/ShashikantBhadke/My-Store/master/Simulator%20Screen%20Shot%20-%20iPhone%20X%20-%202019-08-24%20at%2012.31.01.png)
+[Video Sample](https://youtu.be/rPyO2s-PEAw)
